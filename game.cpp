@@ -1,8 +1,5 @@
 #include "game.h"
-
-Game::Game() {}
-
-Game::~Game() {}
+#include "scene.h"
 
 /**
  * Initiates SDL and game functions
@@ -36,10 +33,24 @@ void Game::initRenderer() {
 void Game::mainLoop() {
 	running = true;
 
+	const int frameRate = 300;
+	const int frameDelay = 1000 / frameRate;
+	Uint32 frameStart;
+	int frameTime;
+
+	Scene scene;
+	scene.build();
+
 	while (running) {
+		frameStart = SDL_GetTicks();
+
 		handleEvents();
 		update();
 		render();
+		
+		frameTime = SDL_GetTicks() - frameStart;
+		if (frameDelay > frameTime)
+			SDL_Delay(frameDelay - frameTime);
 	}
 }
 
@@ -72,9 +83,6 @@ void Game::handleEvents() {
  * Updates game status
  */
 void Game::update() {
-	count == 0;
-	count++;
-	std::cout << count << std::endl;
 }
 
 /**

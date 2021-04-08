@@ -2,21 +2,20 @@
 #define game_h
 
 #include "SDL.h"
+
 #include <stdio.h>
 #include <iostream>
 
 class Game {
 public:
-	Game();
-	~Game();
+	Game() {};
+	~Game() {};
 	void run();
 
 private:
 	SDL_Window * window;
 	SDL_Renderer * renderer;
 	bool running;
-
-	int count;
 
 	void initWindow();
 	void initRenderer();
