@@ -15,7 +15,7 @@ void Game::run() {
  * Initiates SDL Window
  */
 void Game::initWindow() {
-	window = SDL_CreateWindow("SDL_demo", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("SDL_demo", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_W, WINDOW_H, SDL_WINDOW_SHOWN);
 }
 
 /**
@@ -23,7 +23,7 @@ void Game::initWindow() {
  */
 void Game::initRenderer() {
 	renderer = SDL_CreateRenderer(window, -1, 0);
-	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+	SDL_SetRenderDrawColor(renderer, 50, 50, 50, 50);
 }
 
 /**
@@ -32,8 +32,7 @@ void Game::initRenderer() {
 void Game::mainLoop() {
 	running = true;
 
-	const int frameRate = 300;
-	const int frameDelay = 1000 / frameRate;
+	const int frameDelay = 1000 / FPS;
 	Uint32 frameStart;
 	int frameTime;
 

@@ -3,6 +3,7 @@
 
 #include "SDL.h"
 #include "scene.h"
+#include "constants.h"
 
 #include <stdio.h>
 #include <iostream>

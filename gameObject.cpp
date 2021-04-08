@@ -17,11 +17,6 @@ GameObject::GameObject(const char* fn, SDL_Renderer * rend, int xPos, int yPos, 
 	this->xPosition = xPos;
 	this->yPosition = yPos;
 
-	this->srcRect.h = rectH;
-	this->srcRect.w = rectW;
-	this->srcRect.x = xPos;
-	this->srcRect.y = yPos;
-
 	this->destRect.h = rectH;
 	this->destRect.w = rectW;
 	this->destRect.x = xPos;
@@ -32,7 +27,7 @@ GameObject::GameObject(const char* fn, SDL_Renderer * rend, int xPos, int yPos, 
  * Renders game object
  */
 void GameObject::render() {
-	SDL_RenderCopy(renderer, texture, &srcRect, &destRect);
+	SDL_RenderCopy(renderer, texture, NULL, &destRect);
 }
 
 /**

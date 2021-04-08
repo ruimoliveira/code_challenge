@@ -22,7 +22,6 @@ private:
 	SDL_Texture * texture;
 	SDL_Rect srcRect, destRect;
 	SDL_Renderer * renderer;
-
 };
 
 #endif

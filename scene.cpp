@@ -12,9 +12,9 @@ Scene::Scene(SDL_Renderer * renderer) {
  * Builds Scene by initializing and drawing all scene items
  */
 void Scene::build() {
-	leftReel = new Reel(LEFT);
-	middleReel = new Reel(MIDDLE);
-	rightReel = new Reel(RIGHT);
+	leftReel = new Reel(LEFT, gameRenderer);
+	middleReel = new Reel(MIDDLE, gameRenderer);
+	rightReel = new Reel(RIGHT, gameRenderer);
 }
 
 /**
