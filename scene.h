@@ -26,9 +26,10 @@ private:
 	int * middleReel;
 	int * leftReel;
 
-	SDL_Texture* loadTexture(const char* filename, SDL_Renderer * renderer);
 	void shuffleReels();
 	void shuffle(int * reel);
+	void draw();
+	SDL_Texture* loadTexture(const char* filename, SDL_Renderer * renderer);
 };
 
 #endif

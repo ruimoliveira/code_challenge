@@ -2,20 +2,7 @@
 
 void Scene::build() {
 	shuffleReels();
-}
-
-/**
- * Loads texture from file
- * @param filename Texture filename
- * @param renderer Target renderer
- * @return Texture
- */
-SDL_Texture* Scene::loadTexture(const char* filename, SDL_Renderer * renderer) {
-	SDL_Surface * tempSurface = IMG_Load(filename);
-	SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
-	SDL_FreeSurface(tempSurface);
-
-	return texture;
+	draw();
 }
 
 /**
@@ -48,7 +35,7 @@ void Scene::shuffleReels() {
 }
 
 /**
- * Shuffles a single reel
+ * Shuffles a single reel placing symbol "seven" in the first position
  * @param reel Reel to shuffle
  */
 void Scene::shuffle(int * reel) {
@@ -58,4 +45,25 @@ void Scene::shuffle(int * reel) {
 	}
 
 	std::random_shuffle(&reel[1], &reel[REEL_SIZE]);
+}
+
+/**
+ * Draws scene components
+ */
+void Scene::draw() {
+
+}
+
+/**
+ * Loads texture from file
+ * @param filename Texture filename
+ * @param renderer Target renderer
+ * @return Texture
+ */
+SDL_Texture* Scene::loadTexture(const char* filename, SDL_Renderer * renderer) {
+	SDL_Surface * tempSurface = IMG_Load(filename);
+	SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
+	SDL_FreeSurface(tempSurface);
+
+	return texture;
 }
