@@ -3,33 +3,31 @@
 
 #include "SDL.h"
 #include "SDL_image.h"
+#include "reel.h"
 
-#include <string>
-#include <algorithm>
-#include <iostream>
-
+/**
+ * @class Scene
+ * @brief Implementation of scene related functionality such as drawing
+ * and destroying game objects.
+ */
 class Scene {
 public:
-	Scene() {};
+	Scene(SDL_Renderer * renderer);
 	~Scene() {};
 
 	void build();
+	void update();
+	void render();
 
 private:
-	const std::string symbols[20] = { "ace", "apple", "bar", "cherry", "chest",
-								 "chip7", "chipspades", "clover", "coin", "diamond",
-								 "emerald", "grapes", "horseshoe", "jack", "king",
-								 "nine", "queen", "seven", "shield", "watermelon" };
-	const int REEL_SIZE = 20;
-
-	int * rightReel;
-	int * middleReel;
-	int * leftReel;
-
-	void shuffleReels();
-	void shuffle(int * reel);
-	void draw();
-	SDL_Texture* loadTexture(const char* filename, SDL_Renderer * renderer);
+	SDL_Renderer * gameRenderer;
+	Reel * leftReel;
+	Reel * middleReel;
+	Reel * rightReel;
+	/*
+	SlotScreen * slotScreen;
+	UserInterface * userInterface;
+	*/
 };
 
 #endif

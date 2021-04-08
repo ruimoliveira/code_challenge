@@ -1,69 +1,36 @@
 #include "scene.h"
 
-void Scene::build() {
-	shuffleReels();
-	draw();
-}
-
 /**
- * Shuffles slot machine reels 
- */
-void Scene::shuffleReels() {
-	leftReel = new int[REEL_SIZE]();
-	shuffle(leftReel);
-	middleReel = new int[REEL_SIZE]();
-	shuffle(middleReel);
-	rightReel = new int[REEL_SIZE]();
-	shuffle(rightReel);
-
-	/*TODO: delete printers
-	for (int i = 0; i < REEL_SIZE; i++) {
-		std::cout << leftReel[i] << "; ";
-	}
-	std::cout << std::endl << std::endl;
-
-	for (int i = 0; i < REEL_SIZE; i++) {
-		std::cout << middleReel[i] << "; ";
-	}
-	std::cout << std::endl << std::endl;
-
-	for (int i = 0; i < REEL_SIZE; i++) {
-		std::cout << rightReel[i] << "; ";
-	}
-	std::cout << std::endl << std::endl;
-	*/
-}
-
-/**
- * Shuffles a single reel placing symbol "seven" in the first position
- * @param reel Reel to shuffle
- */
-void Scene::shuffle(int * reel) {
-	reel[0] = 17;
-	for (int i = 1; i < REEL_SIZE; i++) {
-		reel[i] = i;
-	}
-
-	std::random_shuffle(&reel[1], &reel[REEL_SIZE]);
-}
-
-/**
- * Draws scene components
- */
-void Scene::draw() {
-
-}
-
-/**
- * Loads texture from file
- * @param filename Texture filename
+ * Scene constructor
  * @param renderer Target renderer
- * @return Texture
  */
-SDL_Texture* Scene::loadTexture(const char* filename, SDL_Renderer * renderer) {
-	SDL_Surface * tempSurface = IMG_Load(filename);
-	SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
-	SDL_FreeSurface(tempSurface);
+Scene::Scene(SDL_Renderer * renderer) {
+	this->gameRenderer = renderer;
+}
 
-	return texture;
+/**
+ * Builds Scene by initializing and drawing all scene items
+ */
+void Scene::build() {
+	leftReel = new Reel(LEFT);
+	middleReel = new Reel(MIDDLE);
+	rightReel = new Reel(RIGHT);
+}
+
+/**
+ * Updates scene status
+ */
+void Scene::update() {
+	leftReel->update();
+	middleReel->update();
+	rightReel->update();
+}
+
+/**
+ * Renders scene components
+ */
+void Scene::render() {
+	leftReel->render();
+	middleReel->render();
+	rightReel->render();
 }

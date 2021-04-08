@@ -1,5 +1,4 @@
 #include "game.h"
-#include "scene.h"
 
 /**
  * Initiates SDL and game functions
@@ -24,7 +23,7 @@ void Game::initWindow() {
  */
 void Game::initRenderer() {
 	renderer = SDL_CreateRenderer(window, -1, 0);
-	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 }
 
 /**
@@ -38,14 +37,17 @@ void Game::mainLoop() {
 	Uint32 frameStart;
 	int frameTime;
 
-	Scene scene;
-	scene.build();
+	scene = new Scene(renderer);
+	scene->build();
+
+	gameState = FINISHED;
 
 	while (running) {
 		frameStart = SDL_GetTicks();
 
 		handleEvents();
-		update();
+		if (gameState != PAUSED)
+			update();
 		render();
 		
 		frameTime = SDL_GetTicks() - frameStart;
@@ -83,6 +85,7 @@ void Game::handleEvents() {
  * Updates game status
  */
 void Game::update() {
+	scene->update();
 }
 
 /**
@@ -90,6 +93,6 @@ void Game::update() {
  */
 void Game::render() {
 	SDL_RenderClear(renderer);
-
+	scene->render();
 	SDL_RenderPresent(renderer);
 }

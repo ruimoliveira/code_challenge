@@ -2,10 +2,17 @@
 #define game_h
 
 #include "SDL.h"
+#include "scene.h"
 
 #include <stdio.h>
 #include <iostream>
 
+enum gameStates { FINISHED, STARTED, PAUSED };
+
+/**
+ * @class Game
+ * @brief Implementation of basic game engine functionality
+ */
 class Game {
 public:
 	Game() {};
@@ -15,7 +22,9 @@ public:
 private:
 	SDL_Window * window;
 	SDL_Renderer * renderer;
+	Scene * scene;
 	bool running;
+	int gameState;
 
 	void initWindow();
 	void initRenderer();
