@@ -35,7 +35,6 @@ public:
 	void render();
 
 private:
-	SDL_Renderer * renderer;
 	GameObject * reelBackground;
 	GameObject * gameSymbol;
 	GameObject * topSymbol;
@@ -48,7 +47,7 @@ private:
 								 "nine", "queen", "seven", "shield", "watermelon" };
 
 	void shuffle();
-	void initGameObjects(int xPos, int yPos);
+	void initGameObjects(SDL_Renderer * renderer, int xPos, int yPos);
 };
 
 #endif

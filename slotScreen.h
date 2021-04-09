@@ -20,7 +20,6 @@ public:
 	void render();
 
 private:
-	SDL_Renderer * renderer;
 	GameObject * topPanel;
 	GameObject * bottomPanel;
 	GameObject * leftPanel;

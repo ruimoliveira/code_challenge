@@ -8,7 +8,6 @@
 Reel::Reel(int reelPos, SDL_Renderer * renderer) {
 	this->shuffle();
 	this->pos = reelPos;
-	this->renderer = renderer;
 
 	int xPos, yPos;
 	switch (reelPos) {
@@ -30,7 +29,7 @@ Reel::Reel(int reelPos, SDL_Renderer * renderer) {
 			break;
 	}
 
-	initGameObjects(xPos, yPos);
+	initGameObjects(renderer, xPos, yPos);
 }
 
 /**
@@ -58,10 +57,11 @@ void Reel::shuffle() {
 
 /**
  * Initiates game objects associated with a reel
+ * @param renderer Target renderer
  * @param xPos Position of the reel in the X axis
  * @param yPos Position of the reel in the Y axis
  */
-void Reel::initGameObjects(int xPos, int yPos) {
+void Reel::initGameObjects(SDL_Renderer * renderer, int xPos, int yPos) {
 	reelBackground = new GameObject("assets/whiteBCKGRD.png", renderer, xPos, yPos, REEL_ROLL_H, REEL_ROLL_W);
 
 	std::string filename = ASSETS_FOLDER + symbols[reelOrder[0]] + ASSET_EXTENSION;

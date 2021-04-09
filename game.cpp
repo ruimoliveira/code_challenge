@@ -37,7 +37,6 @@ void Game::mainLoop() {
 	int frameTime;
 
 	scene = new Scene(renderer);
-	scene->build();
 
 	gameState = FINISHED;
 

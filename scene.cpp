@@ -5,17 +5,10 @@
  * @param renderer Target renderer
  */
 Scene::Scene(SDL_Renderer * renderer) {
-	this->gameRenderer = renderer;
-}
-
-/**
- * Builds Scene by initializing and drawing all scene items
- */
-void Scene::build() {
-	leftReel = new Reel(LEFT, gameRenderer);
-	middleReel = new Reel(MIDDLE, gameRenderer);
-	rightReel = new Reel(RIGHT, gameRenderer);
-	slotScreen = new SlotScreen(gameRenderer);
+	leftReel = new Reel(LEFT, renderer);
+	middleReel = new Reel(MIDDLE, renderer);
+	rightReel = new Reel(RIGHT, renderer);
+	slotScreen = new SlotScreen(renderer);
 }
 
 /**

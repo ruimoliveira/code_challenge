@@ -16,12 +16,10 @@ public:
 	Scene(SDL_Renderer * renderer);
 	~Scene() {};
 
-	void build();
 	void update();
 	void render();
 
 private:
-	SDL_Renderer * gameRenderer;
 	Reel * leftReel;
 	Reel * middleReel;
 	Reel * rightReel;
