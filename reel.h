@@ -10,11 +10,11 @@
 #include <iostream>
 #include <random>
 
-const int REEL_ROLL_H = 350;
+const int REEL_ROLL_H = 320;
 const int REEL_ROLL_W = 120;
 const int REEL_MARGIN = 5;
 const int SYMBOL_W_H = 100;
-const int SYMBOL_MARGIN = 25;
+const int SYMBOL_MARGIN = 10;
 const int REEL_SIZE = 20;
 
 const std::string ASSETS_FOLDER = "assets/";

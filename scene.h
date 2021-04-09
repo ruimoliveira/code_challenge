@@ -4,6 +4,7 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include "reel.h"
+#include "slotScreen.h"
 
 /**
  * @class Scene
@@ -24,8 +25,8 @@ private:
 	Reel * leftReel;
 	Reel * middleReel;
 	Reel * rightReel;
-	/*
 	SlotScreen * slotScreen;
+	/*
 	UserInterface * userInterface;
 	*/
 };

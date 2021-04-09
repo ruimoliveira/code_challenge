@@ -15,6 +15,7 @@ void Scene::build() {
 	leftReel = new Reel(LEFT, gameRenderer);
 	middleReel = new Reel(MIDDLE, gameRenderer);
 	rightReel = new Reel(RIGHT, gameRenderer);
+	slotScreen = new SlotScreen(gameRenderer);
 }
 
 /**
@@ -33,4 +34,5 @@ void Scene::render() {
 	leftReel->render();
 	middleReel->render();
 	rightReel->render();
+	slotScreen->render();
 }
