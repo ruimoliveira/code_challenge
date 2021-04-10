@@ -48,11 +48,11 @@ void Reel::shuffle() {
 	std::shuffle(&reelOrder[1], &reelOrder[REEL_SIZE], std::default_random_engine(std::random_device()()));
 
 	/*TODO: delete printers
-	*/
 	for (int i = 0; i < REEL_SIZE; i++) {
 		std::cout << reelOrder[i] << "; ";
 	}
 	std::cout << std::endl << std::endl;
+	*/
 }
 
 /**

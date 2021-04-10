@@ -14,7 +14,7 @@ public:
 	~GameObject() {};
 
 	void loadTexture(const char* filename, SDL_Renderer * renderer);
-	void update();
+	virtual void update();
 	void render();
 
 private:

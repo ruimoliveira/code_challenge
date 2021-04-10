@@ -9,6 +9,7 @@ Scene::Scene(SDL_Renderer * renderer) {
 	middleReel = new Reel(MIDDLE, renderer);
 	rightReel = new Reel(RIGHT, renderer);
 	slotScreen = new SlotScreen(renderer);
+	userInterface = new UserInterface(renderer);
 }
 
 /**
@@ -18,6 +19,7 @@ void Scene::update() {
 	leftReel->update();
 	middleReel->update();
 	rightReel->update();
+	userInterface->update();
 }
 
 /**
@@ -28,4 +30,5 @@ void Scene::render() {
 	middleReel->render();
 	rightReel->render();
 	slotScreen->render();
+	userInterface->render();
 }
