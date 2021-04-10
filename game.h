@@ -2,38 +2,26 @@
 #define game_h
 
 #include "SDL.h"
-#include "scene.h"
-#include "constants.h"
-
-#include <stdio.h>
-#include <iostream>
 
 enum gameStates { FINISHED, STARTED, PAUSED };
 
 /**
  * @class Game
- * @brief Implementation of basic game engine functionality
+ * @brief Implementation of game wide functions and variables
  */
 class Game {
 public:
-	Game() {};
+
+	Game(SDL_Window * window);
 	~Game() {};
-	void run();
 
-private:
-	SDL_Window * window;
-	SDL_Renderer * renderer;
-	Scene * scene;
-	bool running;
-	int gameState;
-
-	void initWindow();
-	void initRenderer();
-	void mainLoop();
+	static SDL_Renderer * getRenderer();
+	static int getGameState();
+	static void setGameState(int gs);
 	void clean();
-	void handleEvents();
-	void update();
-	void render();
+private:
+	static SDL_Renderer * renderer;
+	static int gameState;
 };
 
 #endif

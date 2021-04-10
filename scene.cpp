@@ -4,12 +4,12 @@
  * Scene constructor
  * @param renderer Target renderer
  */
-Scene::Scene(SDL_Renderer * renderer) {
-	leftReel = new Reel(LEFT, renderer);
-	middleReel = new Reel(MIDDLE, renderer);
-	rightReel = new Reel(RIGHT, renderer);
-	slotScreen = new SlotScreen(renderer);
-	userInterface = new UserInterface(renderer);
+Scene::Scene() {
+	leftReel = new Reel(LEFT);
+	middleReel = new Reel(MIDDLE);
+	rightReel = new Reel(RIGHT);
+	slotScreen = new SlotScreen();
+	userInterface = new UserInterface();
 }
 
 /**

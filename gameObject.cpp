@@ -3,14 +3,13 @@
 /**
  * GameObject constructor
  * @param fn Texture filename
- * @param rend Target renderer
  * @param xPos Position in the X axis
  * @param yPos Position in the Y axis
  * @param rectH Rectangle height
  * @param rectW Rectangle width
  */
-GameObject::GameObject(const char* fn, SDL_Renderer * rend, int xPos, int yPos, int rectH, int rectW) : renderer{ rend }, xPosition{ xPos }, yPosition{ yPos } {
-	loadTexture(fn, rend);
+GameObject::GameObject(const char* fn, int xPos, int yPos, int rectH, int rectW) : xPosition{ xPos }, yPosition{ yPos } {
+	loadTexture(fn);
 
 	destRect.h = rectH;
 	destRect.w = rectW;
@@ -22,7 +21,7 @@ GameObject::GameObject(const char* fn, SDL_Renderer * rend, int xPos, int yPos, 
  * Renders game object
  */
 void GameObject::render() {
-	SDL_RenderCopy(renderer, texture, NULL, &destRect);
+	SDL_RenderCopy(Game::getRenderer(), texture, NULL, &destRect);
 }
 
 /**
@@ -38,9 +37,9 @@ void GameObject::update() {
  * @param renderer Target renderer
  * @return Texture
  */
-void GameObject::loadTexture(const char* filename, SDL_Renderer * renderer) {
+void GameObject::loadTexture(const char* filename) {
 	SDL_Surface * tempSurface = IMG_Load(filename);
-	SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, tempSurface);
+	SDL_Texture * texture = SDL_CreateTextureFromSurface(Game::getRenderer(), tempSurface);
 	SDL_FreeSurface(tempSurface);
 
 	this->texture = texture;

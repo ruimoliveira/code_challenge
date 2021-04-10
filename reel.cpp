@@ -5,7 +5,7 @@
  * @param reelPos Reel position
  * @param renderer Target renderer
  */
-Reel::Reel(int reelPos, SDL_Renderer * renderer) : pos {reelPos} {
+Reel::Reel(int reelPos) : pos {reelPos} {
 	this->shuffle();
 
 	int xPos, yPos;
@@ -28,7 +28,7 @@ Reel::Reel(int reelPos, SDL_Renderer * renderer) : pos {reelPos} {
 			break;
 	}
 
-	initGameObjects(renderer, xPos, yPos);
+	initGameObjects(xPos, yPos);
 }
 
 /**
@@ -56,21 +56,20 @@ void Reel::shuffle() {
 
 /**
  * Initiates game objects associated with a reel
- * @param renderer Target renderer
  * @param xPos Position of the reel in the X axis
  * @param yPos Position of the reel in the Y axis
  */
-void Reel::initGameObjects(SDL_Renderer * renderer, int xPos, int yPos) {
-	reelBackground = new GameObject("assets/whiteBCKGRD.png", renderer, xPos, yPos, REEL_ROLL_H, REEL_ROLL_W);
+void Reel::initGameObjects(int xPos, int yPos) {
+	reelBackground = new GameObject("assets/whiteBCKGRD.png", xPos, yPos, REEL_ROLL_H, REEL_ROLL_W);
 
 	std::string filename = ASSETS_FOLDER + symbols[reelOrder[0]] + ASSET_EXTENSION;
-	gameSymbol = new GameObject(&filename[0], renderer, xPos + ((REEL_ROLL_W - SYMBOL_W_H) / 2), yPos + (SYMBOL_W_H + SYMBOL_MARGIN), SYMBOL_W_H, SYMBOL_W_H);
+	gameSymbol = new GameObject(&filename[0], xPos + ((REEL_ROLL_W - SYMBOL_W_H) / 2), yPos + (SYMBOL_W_H + SYMBOL_MARGIN), SYMBOL_W_H, SYMBOL_W_H);
 
 	filename = ASSETS_FOLDER + symbols[reelOrder[REEL_SIZE - 1]] + ASSET_EXTENSION;
-	topSymbol = new GameObject(&filename[0], renderer, xPos + ((REEL_ROLL_W - SYMBOL_W_H) / 2), yPos, SYMBOL_W_H, SYMBOL_W_H);
+	topSymbol = new GameObject(&filename[0], xPos + ((REEL_ROLL_W - SYMBOL_W_H) / 2), yPos, SYMBOL_W_H, SYMBOL_W_H);
 
 	filename = ASSETS_FOLDER + symbols[reelOrder[1]] + ASSET_EXTENSION;
-	bottomSymbol = new GameObject(&filename[0], renderer, xPos + ((REEL_ROLL_W - SYMBOL_W_H) / 2), yPos + ((SYMBOL_W_H + SYMBOL_MARGIN) * 2), SYMBOL_W_H, SYMBOL_W_H);
+	bottomSymbol = new GameObject(&filename[0], xPos + ((REEL_ROLL_W - SYMBOL_W_H) / 2), yPos + ((SYMBOL_W_H + SYMBOL_MARGIN) * 2), SYMBOL_W_H, SYMBOL_W_H);
 }
 
 /**

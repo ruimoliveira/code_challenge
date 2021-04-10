@@ -14,7 +14,7 @@
  */
 class Scene {
 public:
-	Scene(SDL_Renderer * renderer);
+	Scene();
 	~Scene() {};
 
 	void update();

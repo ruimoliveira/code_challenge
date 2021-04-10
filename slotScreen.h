@@ -14,7 +14,7 @@ const int SCREEN_H = 200;
  */
 class SlotScreen {
 public:
-	SlotScreen(SDL_Renderer * renderer);
+	SlotScreen();
 	~SlotScreen() {};
 
 	void render();

@@ -1,13 +1,13 @@
-#include "game.h"
+#include "engine.h"
 
 #include <iostream>
 #include <stdexcept>
 
 int main(int argc, char *argv[]) {
-	Game game;
+	Engine engine;
 
 	try {
-		game.run();
+		engine.run();
 	} catch (const std::exception & e) {
 		std::cerr << e.what() << std::endl;
 		return EXIT_FAILURE;

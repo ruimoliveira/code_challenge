@@ -18,7 +18,7 @@ const float CREDITS_OUT_W = 530 * UI_SCALE;
  */
 class Button : public GameObject{
 public:
-	Button(const char* filename, SDL_Renderer * renderer, int xPosition, int yPosition, int rectH, int rectW, int buttonID);
+	Button(const char* filename, int xPosition, int yPosition, int rectH, int rectW, int buttonID);
 	~Button() {};
 
 	void update() override;

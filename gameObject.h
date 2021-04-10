@@ -3,6 +3,7 @@
 
 #include "SDL.h"
 #include "SDL_image.h"
+#include "game.h"
 
 /**
  * @class GameObject
@@ -10,10 +11,10 @@
  */
 class GameObject {
 public:
-	GameObject(const char* filename, SDL_Renderer * renderer, int xPosition, int yPosition, int rectH, int rectW);
+	GameObject(const char* filename, int xPosition, int yPosition, int rectH, int rectW);
 	~GameObject() {};
 
-	void loadTexture(const char* filename, SDL_Renderer * renderer);
+	void loadTexture(const char* filename);
 	virtual void update();
 	void render();
 
@@ -21,7 +22,6 @@ private:
 	int xPosition, yPosition;
 	SDL_Texture * texture;
 	SDL_Rect srcRect, destRect;
-	SDL_Renderer * renderer;
 };
 
 #endif

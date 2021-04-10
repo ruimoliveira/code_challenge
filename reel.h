@@ -28,7 +28,7 @@ enum reelPos { LEFT, MIDDLE, RIGHT };
  */
 class Reel{
 public:
-	Reel(int reelPos, SDL_Renderer * renderer);
+	Reel(int reelPos);
 	~Reel() {};
 
 	void update();
@@ -47,7 +47,7 @@ private:
 								 "nine", "queen", "seven", "shield", "watermelon" };
 
 	void shuffle();
-	void initGameObjects(SDL_Renderer * renderer, int xPos, int yPos);
+	void initGameObjects(int xPos, int yPos);
 };
 
 #endif

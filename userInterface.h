@@ -11,7 +11,7 @@
  */
 class UserInterface {
 public:
-	UserInterface(SDL_Renderer * renderer);
+	UserInterface();
 	~UserInterface() {};
 
 	void update();

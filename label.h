@@ -17,14 +17,13 @@ const float LOGO_MARGIN = 25 * UI_SCALE;
  */
 class Label {
 public:
-	Label(SDL_Renderer * renderer);
+	Label();
 	~Label() {};
 
 	void update();
 	void render();
 
 private:
-	SDL_Renderer * renderer;
 	int credits;
 	std::map<int, GameObject*> label;
 };
