@@ -2,7 +2,6 @@
 
 /**
  * UserInterface constructor
- * @param renderer Target renderer
  */
 UserInterface::UserInterface() {
 	creditsInButton = new Button("assets/creditsIn.png", (int)(WINDOW_W - CREDITS_IN_W - EDGE_MARGIN), EDGE_MARGIN, (int)BUTTON_H, (int)CREDITS_IN_W, CREDITS_IN);

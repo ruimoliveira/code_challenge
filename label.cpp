@@ -2,7 +2,6 @@
 
 /**
  * Label constructor
- * @param renderer Target renderer
  */
 Label::Label() {
 	this->credits = 0;

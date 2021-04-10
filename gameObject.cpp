@@ -34,7 +34,6 @@ void GameObject::update() {
 /**
  * Loads texture from file
  * @param filename Texture filename
- * @param renderer Target renderer
  * @return Texture
  */
 void GameObject::loadTexture(const char* filename) {

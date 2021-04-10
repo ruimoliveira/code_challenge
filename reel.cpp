@@ -3,7 +3,6 @@
 /**
  * Reel constructor
  * @param reelPos Reel position
- * @param renderer Target renderer
  */
 Reel::Reel(int reelPos) : pos {reelPos} {
 	this->shuffle();

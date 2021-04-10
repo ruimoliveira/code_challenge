@@ -2,7 +2,6 @@
 
 /**
  * Scene constructor
- * @param renderer Target renderer
  */
 Scene::Scene() {
 	leftReel = new Reel(LEFT);
