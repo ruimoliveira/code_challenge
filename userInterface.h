@@ -3,7 +3,12 @@
 
 #include "SDL.h"
 #include "button.h"
+#include "label.h"
 
+/**
+ * @class UserInterface
+ * @brief UserInterface class that encompases all UI elements
+ */
 class UserInterface {
 public:
 	UserInterface(SDL_Renderer * renderer);
@@ -15,7 +20,7 @@ private:
 	Button * creditsInButton;
 	Button * creditsOutButton;
 	Button * startButton;
-	//Label * creditsLabel;
+	Label * creditsLabel;
 };
 
 #endif

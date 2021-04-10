@@ -4,7 +4,7 @@
 #include <string>
 
 const int WINDOW_H = 600;
-const int WINDOW_W = 800;
+const int WINDOW_W = 1000;
 const int FPS = 300;
 const float UI_SCALE = 0.6F;
 const int EDGE_MARGIN = 20;
