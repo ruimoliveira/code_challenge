@@ -9,18 +9,13 @@
  * @param rectH Rectangle height
  * @param rectW Rectangle width
  */
-GameObject::GameObject(const char* fn, SDL_Renderer * rend, int xPos, int yPos, int rectH, int rectW) {
-	this->renderer = rend;
-
+GameObject::GameObject(const char* fn, SDL_Renderer * rend, int xPos, int yPos, int rectH, int rectW) : renderer{ rend }, xPosition{ xPos }, yPosition{ yPos } {
 	loadTexture(fn, rend);
 
-	this->xPosition = xPos;
-	this->yPosition = yPos;
-
-	this->destRect.h = rectH;
-	this->destRect.w = rectW;
-	this->destRect.x = xPos;
-	this->destRect.y = yPos;
+	destRect.h = rectH;
+	destRect.w = rectW;
+	destRect.x = xPos;
+	destRect.y = yPos;
 }
 
 /**

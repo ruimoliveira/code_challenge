@@ -5,9 +5,8 @@
  * @param reelPos Reel position
  * @param renderer Target renderer
  */
-Reel::Reel(int reelPos, SDL_Renderer * renderer) {
+Reel::Reel(int reelPos, SDL_Renderer * renderer) : pos {reelPos} {
 	this->shuffle();
-	this->pos = reelPos;
 
 	int xPos, yPos;
 	switch (reelPos) {
