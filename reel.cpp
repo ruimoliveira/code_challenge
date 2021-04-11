@@ -4,7 +4,7 @@
  * Reel constructor
  * @param reelPos Reel position
  */
-Reel::Reel(int reelPos) : position{ reelPos }, status{ STOPPED }, currentVelocity{ 0 } {
+Reel::Reel(int reelPos) : position{ reelPos }, status{ REEL_STOPPED }, currentVelocity{ 0 }, reelHead{ 0 } {
 	shuffle();
 	display();
 }
@@ -25,7 +25,7 @@ void Reel::shuffle() {
 	std::shuffle(&reelOrder[1], &reelOrder[REEL_SIZE], std::default_random_engine(std::random_device()()));
 
 	if (DEBUG) {
-		printf("[REEL] Reel %i:\n\t", position);
+		printf("[REEL %i] Reel %i:\n\t", position);
 		for (int i = 0; i < REEL_SIZE; i++)
 			printf("%i; ", reelOrder[i]);
 		printf("\n");
@@ -63,17 +63,22 @@ void Reel::initGameObjects(int xPos, int yPos) {
 }
 
 /**
- * Updates slot machine reel
+ * Spins de reel roll
+ * @param distance How much symbols much travel
  */
 void Reel::roll(int distance) {
-	if (spinsLeft > 0 && currentSymbolPosition != REEL_SIZE - 1) {
-		if (!displayingTopSymbol()) {
-			swapSymbols();
-		} else {
-			gameSymbol->setDestRectY(gameSymbol->getY() - distance);
-			topSymbol->setDestRectY(topSymbol->getY() - distance);
-			bottomSymbol->setDestRectY(bottomSymbol->getY() - distance);
-		}
+	if (!displayingTopSymbol())
+		swapSymbols();
+
+	if (currentVelocity == 0) {
+		int yPos = (WINDOW_H - REEL_ROLL_H) / 2;
+		gameSymbol->setDestRectY(yPos + (SYMBOL_W_H + SYMBOL_MARGIN));
+		topSymbol->setDestRectY(yPos);
+		bottomSymbol->setDestRectY(yPos + ((SYMBOL_W_H + SYMBOL_MARGIN) * 2));
+	} else {
+		gameSymbol->setDestRectY(gameSymbol->getY() - distance);
+		topSymbol->setDestRectY(topSymbol->getY() - distance);
+		bottomSymbol->setDestRectY(bottomSymbol->getY() - distance);
 	}
 }
 
@@ -97,18 +102,31 @@ bool Reel::displayingTopSymbol() {
 void Reel::swapSymbols() {
 	topSymbol->deleteTexture();
 	topSymbol = gameSymbol;
-
 	gameSymbol = bottomSymbol;
 
-	int nextSymbol = currentSymbolPosition++ + 2;
-	if (nextSymbol >= 20) {
-		nextSymbol = nextSymbol - 20;
-	}
-	std::string filename = ASSETS_FOLDER + symbols[reelOrder[nextSymbol]] + ASSET_EXTENSION;
+	int nextSymbolPosition = currentSymbolPosition + 2;
+	if (nextSymbolPosition > 19)
+		nextSymbolPosition = nextSymbolPosition - 20;
+
+	std::string filename = ASSETS_FOLDER + symbols[reelOrder[nextSymbolPosition]] + ASSET_EXTENSION;
 	bottomSymbol = new GameObject(&filename[0], (getX() + ((REEL_ROLL_W - SYMBOL_W_H) / 2)), (gameSymbol->getY() + SYMBOL_W_H + SYMBOL_MARGIN), SYMBOL_W_H, SYMBOL_W_H);
 
-	if (currentSymbolPosition == REEL_SIZE - 1)
+
+	int afterSymbolPosition = currentSymbolPosition + 6;
+	if (afterSymbolPosition > 19)
+		afterSymbolPosition = afterSymbolPosition - 20;
+
+	if (afterSymbolPosition == Game::getGameResult(position) && spinsLeft == 0) {
+		status = REEL_DECELERATING;
+	}
+
+	if (currentSymbolPosition == REEL_SIZE - 1 && spinsLeft > 0)
 		spinsLeft--;
+
+	currentSymbolPosition++;
+	if (currentSymbolPosition > 19)
+		currentSymbolPosition = currentSymbolPosition - 20;
+
 }
 
 /**
@@ -140,12 +158,14 @@ void Reel::update() {
 		float frameTime = (float)(SDL_GetTicks() - lastFrameTick)/1000;
 		float distance = 0;
 		switch (status) {
-			case STOPPED:
-				status = ACCELERATING;
-			case ACCELERATING:
+			case REEL_STOPPED:
+				if (spinsLeft != 0)
+					status = REEL_ACCELERATING;
+				break;
+			case REEL_ACCELERATING:
 				currentVelocity = currentVelocity + REEL_ACCELERATION * frameTime;
 				if (currentVelocity > MAX_REEL_VELOCITY) {
-					status = MOVING;
+					status = REEL_MOVING;
 					currentVelocity = MAX_REEL_VELOCITY;
 				}
 
@@ -153,12 +173,32 @@ void Reel::update() {
 				roll(distance);
 				break;
 
-			case MOVING:
+			case REEL_MOVING:
 				distance = (int)(currentVelocity * frameTime);
 				roll(distance);
 				break;
 
-			case DECELERATING:
+			case REEL_DECELERATING:
+				currentVelocity = currentVelocity + REEL_DECELERATION * frameTime;
+				if (currentVelocity < 0) {
+					status = REEL_STOPPED;
+
+					if (DEBUG) {
+						printf("[REEL %i] winPos = %i \t winSmbl = %i \t currPos = %i \t currSmbl = %i\n",
+							position, Game::getGameResult(position), reelOrder[Game::getGameResult(position)], currentSymbolPosition, reelOrder[currentSymbolPosition]);
+					}
+
+					if (position == RIGHT) {
+						Game::setGameState(FINISHED);
+						if (DEBUG)
+							printf("[REEL %i] Game Finished\n", position);
+					}
+
+					currentVelocity = 0;
+				}
+
+				distance = (int)(currentVelocity * frameTime + 0.5 * REEL_DECELERATION * frameTime * frameTime);
+				roll(distance);
 				break;
 		}
 	}

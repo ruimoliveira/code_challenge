@@ -140,7 +140,7 @@ void Button::action() {
 					break;
 
 				case PAUSED:
-					Game::setGameState(STARTED);
+					Game::setGameState(PLAYING);
 					if (DEBUG)
 						printf("[BUTTON] Game Started\n");
 					break;

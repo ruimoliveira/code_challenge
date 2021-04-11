@@ -17,11 +17,14 @@ const int REEL_MARGIN = 5;
 const int SYMBOL_W_H = 100;
 const int SYMBOL_MARGIN = 10;
 const int REEL_SIZE = 20;
-const int MAX_REEL_VELOCITY = 2737;
+const int MAX_REEL_VELOCITY = 2755;
 const int REEL_ACCELERATION = 13687;
+const int REEL_DECELERATION = -5685;
+const int REEL_SLOW_DECELERATION = -5685;
+//const int LOOK_AHEAD = 
 
 enum reelPos { LEFT, MIDDLE, RIGHT };
-enum reelStatus { STOPPED, ACCELERATING, MOVING, DECELERATING };
+enum reelStatus { REEL_STOPPED, REEL_ACCELERATING, REEL_MOVING, REEL_DECELERATING };
 
 /**
  * @class Scene
@@ -44,6 +47,7 @@ private:
 	int * reelOrder;
 	int position;
 	int status;
+	int reelHead;
 	Uint32 lastFrameTick;
 	float currentVelocity;
 	int currentSymbolPosition;
