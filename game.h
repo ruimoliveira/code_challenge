@@ -2,13 +2,16 @@
 #define game_h
 
 #include "SDL.h"
+#include "constants.h"
 
 #include <stdio.h>
-#include <iostream>
+#include <time.h>
+#include <random>
 
-enum gameStates { FINISHED, STARTED, PAUSED };
+enum gameStates { FINISHED, STARTED, PLAYING, PAUSED };
 enum mouseStates { MOUSE_UP, MOUSE_DOWN, MOUSE_IDDLE };
 const int MIN_REEL_ROTATIONS = 1;
+const int N_REELS = 3;
 
 /**
  * @class Game
@@ -27,12 +30,16 @@ public:
 	static void setMouseState(int ms);
 	static int getCredits();
 	static void setCredits(int c);
+	static int getGameResult(int reelPosition);
 	void clean();
 private:
 	static int credits;
 	static SDL_Renderer * renderer;
 	static int gameState;
 	static int mouseState;
+	static int gameResult[];
+
+	static void computeResult();
 };
 
 #endif

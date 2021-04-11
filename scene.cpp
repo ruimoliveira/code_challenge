@@ -31,3 +31,14 @@ void Scene::render() {
 	slotScreen->render();
 	userInterface->render();
 }
+
+/**
+ * Safely destroys scene
+ */
+void Scene::clean() {
+	leftReel->clean();
+	middleReel->clean();
+	rightReel->clean();
+	slotScreen->clean();
+	userInterface->clean();
+}

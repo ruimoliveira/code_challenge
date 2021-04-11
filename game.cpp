@@ -5,6 +5,7 @@ SDL_Renderer * Game::renderer = nullptr;
 int Game::gameState = FINISHED;
 int Game::mouseState = MOUSE_IDDLE;
 int Game::credits = 0;
+int Game::gameResult[] = {0, 0, 0};
 
 /**
  * Game constructor
@@ -12,13 +13,36 @@ int Game::credits = 0;
  */
 Game::Game(SDL_Window * window) {
 	renderer = SDL_CreateRenderer(window, -1, 0);
+	credits = 0;
 }
 
 /**
  * Starts game
  */
 void Game::start() {
+	gameState = STARTED;
+	if (DEBUG)
+		printf("[GAME] gameState : %i\n", gameState);
+	
+	credits--;
 
+	computeResult();
+	gameState = PLAYING;
+	if (DEBUG)
+		printf("[GAME] gameState : %i\n", gameState);
+}
+
+/**
+ * Computes game result
+ */
+void Game::computeResult() {
+	srand(time(NULL));
+	for (int i = 0; i < N_REELS; i++) {
+		gameResult[i] = rand() % 20;
+	}
+
+	if (DEBUG)
+		printf("[GAME] Reel final positions: { %i, %i, %i }\n", gameResult[0], gameResult[1], gameResult[2]);
 }
 
 /**
@@ -75,6 +99,14 @@ int Game::getCredits() {
  */
 void Game::setCredits(int c) {
 	credits = c;
+}
+
+/**
+ * Getter for the final reel symbol to display
+ * @returns symbol's reel position
+ */
+int Game::getGameResult(int reelPosition) {
+	return gameResult[reelPosition];
 }
 
 /**

@@ -6,8 +6,8 @@
 #include "constants.h"
 #include "game.h"
 
+#include <stdio.h>
 #include <map>
-#include <iostream>
 #include <string>
 
 const float LABEL_W = 55 * UI_SCALE;

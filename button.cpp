@@ -27,7 +27,7 @@ int Button::update(int bl, bool lastButton) {
 			buttonLock = buttonID;
 
 			if (DEBUG)
-				std::cout << "collision with bnt " << buttonID << std::endl;
+				printf("[BUTTON] Collision with button %i\n", buttonID);
 
 		} else {
 			pressed = false;
@@ -35,7 +35,7 @@ int Button::update(int bl, bool lastButton) {
 				buttonLock = 0;
 
 				if (DEBUG)
-					std::cout << "NO collision with bnt " << buttonID << std::endl;
+					printf("[BUTTON] No collision\n");
 			}
 		}
 	}
@@ -104,38 +104,45 @@ void Button::action() {
 	int credits = Game::getCredits();
 	switch (buttonID) {
 		case CREDITS_IN_BTN:
-			if (DEBUG)
-				std::cout << "CREDITS_IN_BTN" << std::endl;
+			if (Game::getGameState() == FINISHED) {
+				if (DEBUG)
+					printf("[BUTTON] Credits in activation\n");
 
-			if (Game::getGameState() == FINISHED)
 				Game::setCredits(++credits);
+			}
 
 			break;
 
 		case CREDITS_OUT_BTN:
-			if (DEBUG)
-				std::cout << "CREDITS_OUT_BTN" << std::endl;
+			if (Game::getGameState() == FINISHED) {
+				if (DEBUG)
+					printf("[BUTTON] Credits out activation\n");
 
-			if (Game::getGameState() == FINISHED)
 				Game::setCredits(0);
+			}
 
 			break;
 
 		case START_BTN:
-			if (DEBUG)
-				std::cout << "START" << std::endl;
-
 			switch (Game::getGameState()) {
 				case FINISHED:
-					
+					if (DEBUG)
+						printf("[BUTTON] Start activation\n");
+
+					if (Game::getCredits() > 0)
+						Game::start();
 					break;
 
-				case STARTED:
+				case PLAYING:
 					Game::setGameState(PAUSED);
+					if (DEBUG)
+						printf("[BUTTON] Game Paused\n");
 					break;
 
 				case PAUSED:
 					Game::setGameState(STARTED);
+					if (DEBUG)
+						printf("[BUTTON] Game Started\n");
 					break;
 
 				default:

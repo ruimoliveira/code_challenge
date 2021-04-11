@@ -7,7 +7,6 @@
 #include "game.h"
 
 #include <stdio.h>
-#include <iostream>
 #include <string>
 
 enum buttonIDs { NONE = 0, CREDITS_IN_BTN = 1, CREDITS_OUT_BTN = 2, START_BTN = 3 };

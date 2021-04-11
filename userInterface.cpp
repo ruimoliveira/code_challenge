@@ -30,3 +30,13 @@ void UserInterface::render() {
 	startButton->render();
 	creditsLabel->render();
 }
+
+/**
+ * Safely deletes UI
+ */
+void UserInterface::clean() {
+	creditsInButton->clean();
+	creditsOutButton->clean();
+	startButton->clean();
+	creditsLabel->clean();
+}

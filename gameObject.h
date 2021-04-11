@@ -15,10 +15,12 @@ public:
 	~GameObject() {};
 
 	void loadTexture(const char* filename);
+	SDL_Rect * getDestRect();
+	int getY();
+	void setDestRectY(int y);
+	void deleteTexture();
 	virtual void update();
 	void render();
-	SDL_Rect * getDestRect();
-	void deleteTexture();
 	void clean();
 
 private:

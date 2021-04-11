@@ -50,23 +50,13 @@ void Engine::mainLoop() {
 		frameStart = SDL_GetTicks();
 
 		handleEvents();
-		if (game->getGameState() != PAUSED)
-			update();
+		update();
 		render();
 		
 		frameTime = SDL_GetTicks() - frameStart;
 		if (frameDelay > frameTime)
 			SDL_Delay(frameDelay - frameTime);
 	}
-}
-
-/**
- * Safely exits SDL
- */
-void Engine::clean() {
-	SDL_DestroyWindow(window);
-	game->clean();
-	SDL_Quit();
 }
 
 /**
@@ -107,4 +97,14 @@ void Engine::render() {
 	SDL_RenderClear(Game::getRenderer());
 	scene->render();
 	SDL_RenderPresent(Game::getRenderer());
+}
+
+/**
+ * Safely exits SDL
+ */
+void Engine::clean() {
+	SDL_DestroyWindow(window);
+	scene->clean();
+	game->clean();
+	SDL_Quit();
 }

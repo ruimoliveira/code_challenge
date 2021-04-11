@@ -7,7 +7,6 @@
 #include "constants.h"
 
 #include <stdio.h>
-#include <iostream>
 
 /**
  * @class Engine
@@ -30,10 +29,10 @@ private:
 	void initGame();
 	void initRenderer();
 	void mainLoop();
-	void clean();
 	void handleEvents();
 	void update();
 	void render();
+	void clean();
 };
 
 #endif

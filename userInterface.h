@@ -19,6 +19,7 @@ public:
 
 	void update();
 	void render();
+	void clean();
 private:
 	int buttonLock;
 	Button * creditsInButton;

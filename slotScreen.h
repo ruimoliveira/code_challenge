@@ -18,6 +18,7 @@ public:
 	~SlotScreen() {};
 
 	void render();
+	void clean();
 
 private:
 	GameObject * topPanel;

@@ -11,11 +11,21 @@ SlotScreen::SlotScreen() {
 }
 
 /**
- * Renders slot machine reel
+ * Renders slot machine screen
  */
 void SlotScreen::render() {
 	topPanel->render();
 	leftPanel->render();
 	rightPanel->render();
 	bottomPanel->render();
+}
+
+/**
+ * Safely deletes slot machine screen
+ */
+void SlotScreen::clean() {
+	topPanel->clean();
+	leftPanel->clean();
+	rightPanel->clean();
+	bottomPanel->clean();
 }

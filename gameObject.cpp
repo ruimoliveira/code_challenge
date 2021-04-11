@@ -31,8 +31,25 @@ void GameObject::update() {
 
 }
 
+/**
+ * Destination rect getter
+ */
 SDL_Rect * GameObject::getDestRect() {
 	return &destRect;
+}
+
+/**
+ * Getter for y axis position
+ */
+int GameObject::getY() {
+	return destRect.y;
+}
+
+/**
+ * Sets new position for SDL_Rect
+ */
+void GameObject::setDestRectY(int y) {
+	destRect.y = y;
 }
 
 /**

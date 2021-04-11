@@ -19,6 +19,8 @@ void Label::addLogo() {
  * Displays new credits' number on the label
  */
 void Label::newNumber() {
+	if (DEBUG)
+		printf("[LABEL] credits = %i\n", credits);
 	auto str = std::to_string(credits);
 	int key = 1;
 	for (char const &c : str) {
