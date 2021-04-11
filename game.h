@@ -23,8 +23,11 @@ public:
 	static void setGameState(int gs);
 	static int getMouseState();
 	static void setMouseState(int ms);
+	static int getCredits();
+	static void setCredits(int c);
 	void clean();
 private:
+	static int credits;
 	static SDL_Renderer * renderer;
 	static int gameState;
 	static int mouseState;

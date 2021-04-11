@@ -3,28 +3,59 @@
 /**
  * Label constructor
  */
-Label::Label() {
-	this->credits = 0;
+Label::Label() : credits{ 0 } {
+	addLogo();
+	newNumber();
+}
 
-	//credits logo
+/**
+ * Adds credits logo to the label
+ */
+void Label::addLogo() {
 	label[0] = new GameObject("assets/charC.png", (int)EDGE_MARGIN, (int)EDGE_MARGIN, (int)LABEL_H, (int)LABEL_W);
+}
 
-	//credits number
-	label[1] = new GameObject("assets/char0.png", (int)(EDGE_MARGIN + LABEL_W + LOGO_MARGIN), (int)EDGE_MARGIN, (int)LABEL_H, (int)LABEL_W);
+/**
+ * Displays new credits' number on the label
+ */
+void Label::newNumber() {
+	auto str = std::to_string(credits);
+	int key = 1;
+	for (char const &c : str) {
+		std::string filename = ASSETS_FOLDER + "char" + c + ASSET_EXTENSION;
+		std::cout << filename << std::endl;
+		label[key] = new GameObject(&filename[0], (int)(EDGE_MARGIN + LABEL_W * key + LOGO_MARGIN), (int)EDGE_MARGIN, (int)LABEL_H, (int)LABEL_W);
+		key++;
+	}
 }
 
 /**
  * Updates Label
  */
 void Label::update() {
+	if (Game::getCredits() != credits) {
+		credits = Game::getCredits();
 
+		clean();
+		addLogo();
+		newNumber();
+	}
 }
 
 /**
  * Renders Label
  */
 void Label::render() {
-	for (auto gmObj = label.begin(); gmObj != label.end(); gmObj++) {
-		gmObj->second->render();
-	}
+	for (auto tuple = label.begin(); tuple != label.end(); tuple++)
+		tuple->second->render();
+}
+
+/**
+ * Cleans Label
+ */
+void Label::clean() {
+	for (auto tuple = label.begin(); tuple != label.end(); tuple++)
+		tuple->second->clean();
+
+	label.clear();
 }

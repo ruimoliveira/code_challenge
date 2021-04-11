@@ -4,6 +4,7 @@
 SDL_Renderer * Game::renderer = nullptr;
 int Game::gameState = FINISHED;
 int Game::mouseState = MOUSE_IDDLE;
+int Game::credits = 0;
 
 /**
  * Game constructor
@@ -51,6 +52,22 @@ int Game::getMouseState() {
  */
 void Game::setMouseState(int ms) {
 	mouseState = ms;
+}
+
+/**
+ * Credit amount getter
+ * @returns credit amount
+ */
+int Game::getCredits() {
+	return credits;
+}
+
+/**
+ * Credit amount setter
+ * @param c New credit amount
+ */
+void Game::setCredits(int c) {
+	credits = c;
 }
 
 /**

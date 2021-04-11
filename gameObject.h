@@ -19,6 +19,7 @@ public:
 	void render();
 	SDL_Rect * getDestRect();
 	void deleteTexture();
+	void clean();
 
 private:
 	int xPosition, yPosition;

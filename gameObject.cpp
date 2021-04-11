@@ -49,6 +49,14 @@ void GameObject::loadTexture(const char* filename) {
 }
 
 /**
+ * Deletes self
+ */
+void GameObject::clean() {
+	deleteTexture();
+	delete this;
+}
+
+/**
  * Deletes Texture
  */
 void GameObject::deleteTexture() {

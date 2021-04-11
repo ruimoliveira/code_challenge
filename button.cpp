@@ -77,6 +77,10 @@ int Button::unpressButton(int bl) {
 	return buttonLock;
 }
 
+/**
+ * Toggles to the other button texture
+ * @param str Differentiator string: "" for unpressed, "2" for pressed
+ */
 void Button::toggleTexture(std::string str) {
 	deleteTexture();
 	std::string filename = ASSETS_FOLDER + filenames[buttonID - 1]+ str + ASSET_EXTENSION;
@@ -87,12 +91,13 @@ void Button::toggleTexture(std::string str) {
  * Triggers the button's action 
  */
 void Button::action() {
+	int credits = Game::getCredits();
 	switch (buttonID) {
 		case CREDITS_IN:
-			std::cout << "CREDITS_IN" << std::endl;
+			Game::setCredits(++credits);
 			break;
 		case CREDITS_OUT:
-			std::cout << "CREDITS_OUT" << std::endl;
+			Game::setCredits(0);
 			break;
 		case START:
 			std::cout << "START" << std::endl;
