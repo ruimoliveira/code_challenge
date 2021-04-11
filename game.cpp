@@ -15,6 +15,13 @@ Game::Game(SDL_Window * window) {
 }
 
 /**
+ * Starts game
+ */
+void Game::start() {
+
+}
+
+/**
  * Renderer getter
  * @returns Renderer
  */

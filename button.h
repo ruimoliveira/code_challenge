@@ -10,7 +10,7 @@
 #include <iostream>
 #include <string>
 
-enum buttonIDs { NONE = 0, CREDITS_IN = 1, CREDITS_OUT = 2, START = 3 };
+enum buttonIDs { NONE = 0, CREDITS_IN_BTN = 1, CREDITS_OUT_BTN = 2, START_BTN = 3 };
 
 const float BUTTON_H = 65 * UI_SCALE;
 const float PLAY_W = 211 * UI_SCALE;

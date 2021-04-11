@@ -23,7 +23,6 @@ void Label::newNumber() {
 	int key = 1;
 	for (char const &c : str) {
 		std::string filename = ASSETS_FOLDER + "char" + c + ASSET_EXTENSION;
-		std::cout << filename << std::endl;
 		label[key] = new GameObject(&filename[0], (int)(EDGE_MARGIN + LABEL_W * key + LOGO_MARGIN), (int)EDGE_MARGIN, (int)LABEL_H, (int)LABEL_W);
 		key++;
 	}

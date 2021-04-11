@@ -25,10 +25,18 @@ int Button::update(int bl, bool lastButton) {
 	if (Game::getMouseState() == MOUSE_DOWN  && (buttonLock == buttonID || buttonLock == -1)) {
 		if (checkMouseCollision()) {
 			buttonLock = buttonID;
+
+			if (DEBUG)
+				std::cout << "collision with bnt " << buttonID << std::endl;
+
 		} else {
 			pressed = false;
-			if (lastButton || (buttonLock == buttonID && !pressed))
+			if (lastButton || (buttonLock == buttonID && !pressed)) {
 				buttonLock = 0;
+
+				if (DEBUG)
+					std::cout << "NO collision with bnt " << buttonID << std::endl;
+			}
 		}
 	}
 
@@ -82,9 +90,11 @@ int Button::unpressButton(int bl) {
  * @param str Differentiator string: "" for unpressed, "2" for pressed
  */
 void Button::toggleTexture(std::string str) {
-	deleteTexture();
-	std::string filename = ASSETS_FOLDER + filenames[buttonID - 1]+ str + ASSET_EXTENSION;
-	loadTexture(&filename[0]);
+	if (Game::getGameState() == FINISHED || buttonID == START_BTN) {
+		deleteTexture();
+		std::string filename = ASSETS_FOLDER + filenames[buttonID - 1] + str + ASSET_EXTENSION;
+		loadTexture(&filename[0]);
+	}
 }
 
 /**
@@ -93,15 +103,46 @@ void Button::toggleTexture(std::string str) {
 void Button::action() {
 	int credits = Game::getCredits();
 	switch (buttonID) {
-		case CREDITS_IN:
-			Game::setCredits(++credits);
+		case CREDITS_IN_BTN:
+			if (DEBUG)
+				std::cout << "CREDITS_IN_BTN" << std::endl;
+
+			if (Game::getGameState() == FINISHED)
+				Game::setCredits(++credits);
+
 			break;
-		case CREDITS_OUT:
-			Game::setCredits(0);
+
+		case CREDITS_OUT_BTN:
+			if (DEBUG)
+				std::cout << "CREDITS_OUT_BTN" << std::endl;
+
+			if (Game::getGameState() == FINISHED)
+				Game::setCredits(0);
+
 			break;
-		case START:
-			std::cout << "START" << std::endl;
+
+		case START_BTN:
+			if (DEBUG)
+				std::cout << "START" << std::endl;
+
+			switch (Game::getGameState()) {
+				case FINISHED:
+					
+					break;
+
+				case STARTED:
+					Game::setGameState(PAUSED);
+					break;
+
+				case PAUSED:
+					Game::setGameState(STARTED);
+					break;
+
+				default:
+					break;
+			}
 			break;
+
 		default:
 			break;
 	}

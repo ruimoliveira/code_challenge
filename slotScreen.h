@@ -6,7 +6,7 @@
 #include "constants.h"
 
 const int SCREEN_W = 400;
-const int SCREEN_H = 200;
+const int SCREEN_H = 220;
 
 /**
  * @class SlotScreen
