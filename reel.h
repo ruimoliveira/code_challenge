@@ -17,9 +17,6 @@ const int SYMBOL_W_H = 100;
 const int SYMBOL_MARGIN = 10;
 const int REEL_SIZE = 20;
 
-const std::string ASSETS_FOLDER = "assets/";
-const std::string ASSET_EXTENSION = ".png";
-
 enum reelPos { LEFT, MIDDLE, RIGHT };
 
 /**

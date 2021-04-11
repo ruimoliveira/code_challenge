@@ -3,7 +3,7 @@
 /**
  * UserInterface constructor
  */
-UserInterface::UserInterface() {
+UserInterface::UserInterface() : buttonLock{ -1 } {
 	creditsInButton = new Button("assets/creditsIn.png", (int)(WINDOW_W - CREDITS_IN_W - EDGE_MARGIN), EDGE_MARGIN, (int)BUTTON_H, (int)CREDITS_IN_W, CREDITS_IN);
 	creditsOutButton = new Button("assets/creditsOut.png", EDGE_MARGIN, (int)(WINDOW_H - BUTTON_H - EDGE_MARGIN), (int)BUTTON_H, (int)CREDITS_OUT_W, CREDITS_OUT);
 	startButton = new Button("assets/start.png", (int)(WINDOW_W - PLAY_W - EDGE_MARGIN), (int)(WINDOW_H - BUTTON_H - EDGE_MARGIN), (int)BUTTON_H, (int)PLAY_W, START);
@@ -14,9 +14,10 @@ UserInterface::UserInterface() {
  * Updates UI
  */
 void UserInterface::update() {
-	creditsInButton->update();
-	creditsOutButton->update();
-	startButton->update();
+	buttonLock = creditsInButton->update(buttonLock, false);
+	buttonLock = creditsOutButton->update(buttonLock, false);
+	buttonLock = startButton->update(buttonLock, true);
+
 	creditsLabel->update();
 }
 

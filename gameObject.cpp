@@ -31,6 +31,10 @@ void GameObject::update() {
 
 }
 
+SDL_Rect * GameObject::getDestRect() {
+	return &destRect;
+}
+
 /**
  * Loads texture from file
  * @param filename Texture filename
@@ -42,4 +46,11 @@ void GameObject::loadTexture(const char* filename) {
 	SDL_FreeSurface(tempSurface);
 
 	this->texture = texture;
+}
+
+/**
+ * Deletes Texture
+ */
+void GameObject::deleteTexture() {
+	SDL_DestroyTexture(texture);
 }

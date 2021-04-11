@@ -3,6 +3,7 @@
 
 SDL_Renderer * Game::renderer = nullptr;
 int Game::gameState = FINISHED;
+int Game::mouseState = MOUSE_IDDLE;
 
 /**
  * Game constructor
@@ -13,7 +14,7 @@ Game::Game(SDL_Window * window) {
 }
 
 /**
- * Renderer Getter
+ * Renderer getter
  * @returns Renderer
  */
 SDL_Renderer * Game::getRenderer() {
@@ -21,7 +22,7 @@ SDL_Renderer * Game::getRenderer() {
 }
 
 /**
- * Game State getter
+ * Game state getter
  * @returns gameState
  */
 int Game::getGameState() {
@@ -29,11 +30,27 @@ int Game::getGameState() {
 }
 
 /**
- * Game State setter
+ * Game state setter
  * @param gs New gamestate to set to
  */
 void Game::setGameState(int gs) {
 	gameState = gs;
+}
+
+/**
+ * Mouse state getter
+ * @returns mouse state
+ */
+int Game::getMouseState() {
+	return mouseState;
+}
+
+/**
+ * Mouse state setter
+ * @param ms New mouse state to set to
+ */
+void Game::setMouseState(int ms) {
+	mouseState = ms;
 }
 
 /**

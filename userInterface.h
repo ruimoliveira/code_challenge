@@ -5,6 +5,9 @@
 #include "button.h"
 #include "label.h"
 
+#include <stdio.h>
+#include <iostream>
+
 /**
  * @class UserInterface
  * @brief UserInterface class that encompases all UI elements
@@ -17,6 +20,7 @@ public:
 	void update();
 	void render();
 private:
+	int buttonLock;
 	Button * creditsInButton;
 	Button * creditsOutButton;
 	Button * startButton;

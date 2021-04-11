@@ -79,6 +79,14 @@ void Engine::handleEvents() {
 		case SDL_QUIT:
 			running = false;
 			break;
+		case SDL_MOUSEBUTTONDOWN:
+			if (event.button.button == SDL_BUTTON_LEFT)
+				game->setMouseState(MOUSE_DOWN);
+			break;
+		case SDL_MOUSEBUTTONUP:
+			if (event.button.button == SDL_BUTTON_LEFT)
+				game->setMouseState(MOUSE_UP);
+			break;
 
 		default:
 			break;

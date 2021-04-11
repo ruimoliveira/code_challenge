@@ -17,6 +17,8 @@ public:
 	void loadTexture(const char* filename);
 	virtual void update();
 	void render();
+	SDL_Rect * getDestRect();
+	void deleteTexture();
 
 private:
 	int xPosition, yPosition;
