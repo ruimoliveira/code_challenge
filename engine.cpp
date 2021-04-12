@@ -18,7 +18,7 @@ void Engine::run() {
  * Initiates SDL Window
  */
 void Engine::initWindow() {
-	window = SDL_CreateWindow("FSLOT", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_W, WINDOW_H, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("Slot Machine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_W, WINDOW_H, SDL_WINDOW_SHOWN);
 }
 
 /**
