@@ -3,7 +3,7 @@
 /**
  * UserInterface constructor
  */
-UserInterface::UserInterface() : buttonLock{ -1 } {
+UserInterface::UserInterface() : mouseLock{ -1 } {
 	creditsInButton = new Button("assets/creditsIn.png", (int)(WINDOW_W - CREDITS_IN_W - EDGE_MARGIN), EDGE_MARGIN, (int)BUTTON_H, (int)CREDITS_IN_W, CREDITS_IN_BTN);
 	creditsOutButton = new Button("assets/creditsOut.png", EDGE_MARGIN, (int)(WINDOW_H - BUTTON_H - EDGE_MARGIN), (int)BUTTON_H, (int)CREDITS_OUT_W, CREDITS_OUT_BTN);
 	startButton = new Button("assets/start.png", (int)(WINDOW_W - PLAY_W - EDGE_MARGIN), (int)(WINDOW_H - BUTTON_H - EDGE_MARGIN), (int)BUTTON_H, (int)PLAY_W, START_BTN);
@@ -14,9 +14,9 @@ UserInterface::UserInterface() : buttonLock{ -1 } {
  * Updates UI
  */
 void UserInterface::update() {
-	buttonLock = creditsInButton->update(buttonLock, false);
-	buttonLock = creditsOutButton->update(buttonLock, false);
-	buttonLock = startButton->update(buttonLock, true);
+	mouseLock = creditsInButton->update(mouseLock, false);
+	mouseLock = creditsOutButton->update(mouseLock, false);
+	mouseLock = startButton->update(mouseLock, true);
 	creditsLabel->update();
 }
 

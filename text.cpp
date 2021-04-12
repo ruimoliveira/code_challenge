@@ -27,12 +27,9 @@ Text::Text(int textID) : textID{ textID }, counter{ 0 }, credits{ 0 } {
  */
 void Text::addToCounter(int qt) {
 	counter = counter + qt;
-	if (DEBUG)
-		printf("[TEXT %i] Counter = %i\n", textID, counter);
-
 	std::string textToDisplay = text + std::to_string(counter);
-	loadTexture(textToDisplay.c_str());
 
+	loadTexture(textToDisplay.c_str());
 	updateTexture();
 }
 
@@ -78,24 +75,22 @@ void Text::render() {
 }
 
 /**
- * Updates Text
+ * Updates credits counters
  */
 void Text::update() {
 	if (Game::getCredits() != credits) {
 		switch (textID) {
-		case TEXT_CREDITS_INSERTED:
-			if (Game::getCredits() == credits + 1)
-				addToCounter(1);
-			break;
+			case TEXT_CREDITS_INSERTED:
+				if (Game::getCredits() == credits + 1)
+					// If raised by 1
+					addToCounter(1);
+				break;
 
-		case TEXT_CREDITS_TAKEN:
-			if (Game::getCredits() == 0 && Game::getGameState() == READY) {
-				if (DEBUG)
-					printf("[TEXT %i] getGameState = %i\n", textID,Game::getGameState());
-
-				addToCounter(credits);
-			}
-			break;
+			case TEXT_CREDITS_TAKEN:
+				if (Game::getCredits() == 0 && Game::getGameState() == READY)
+					// If credits were zeroed by the button
+					addToCounter(credits);
+				break;
 		}
 
 		credits = Game::getCredits();

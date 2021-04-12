@@ -16,22 +16,22 @@ Button::Button(const char* filename, int xPosition, int yPosition, int rectH, in
 
 /**
  * Updates button status
- * @param bl Which button is being clicked
- * @param lastButton If this function is checking the last button in the UI
+ * @param mouseLock Which button is being clicked
+ * @param lastButton Signals if this function is checking the last button in the UI
+ * @returns NONE if !checkMouseCollision(), buttonID if checkMouseCollision()
  */
-int Button::update(int bl, bool lastButton) {
-	int buttonLock = bl;
-	if (Game::getMouseState() == MOUSE_DOWN  && (buttonLock == buttonID || buttonLock == -1)) {
+int Button::update(int mouseLock, bool lastButton) {
+	if (Game::getMouseState() == MOUSE_DOWN  && (mouseLock == buttonID || mouseLock == -1)) {
 		if (checkMouseCollision()) {
-			buttonLock = buttonID;
+			// Signals that button is being pressed
+			mouseLock = buttonID;
 
 			if (DEBUG)
 				printf("[BUTTON] Collision with button %i\n", buttonID);
-
 		} else {
-			pressed = false;
-			if (lastButton || (buttonLock == buttonID && !pressed)) {
-				buttonLock = 0;
+			// Signals that button it not being pressed
+			if (lastButton || (mouseLock == buttonID && !pressed)) {
+				mouseLock = NONE;
 
 				if (DEBUG)
 					printf("[BUTTON] No collision\n");
@@ -39,15 +39,15 @@ int Button::update(int bl, bool lastButton) {
 		}
 	}
 
-	if (Game::getMouseState() == MOUSE_UP && buttonLock == buttonID) {
-		buttonLock = unpressButton(buttonLock);
+	// Actions the button if mouse never stopped colliding with button
+	if (Game::getMouseState() == MOUSE_UP && mouseLock == buttonID)
 		action();
-	}
 
-	if (Game::getMouseState() == MOUSE_UP && buttonLock == NONE)
-		buttonLock = unpressButton(buttonLock);
+	// Unpresses button
+	if (Game::getMouseState() == MOUSE_UP && (mouseLock == NONE || mouseLock == buttonID))
+		mouseLock = unpressButton(mouseLock);
 
-	return buttonLock;
+	return mouseLock;
 }
 
 /**
@@ -58,13 +58,14 @@ bool Button::checkMouseCollision() {
 	SDL_GetMouseState(&x, &y);
 	SDL_Rect mouseRect = { x,y,1,1 };
 
-
 	if (SDL_HasIntersection(&mouseRect, getDestRect())) {
+		// Signals that button and mouse are colliding
 		if (!pressed)
 			toggleTexture("2");
 		pressed = true;
 		return true;
 	} else if (pressed) {
+		// Signals that button and mouse are not colliding
 		toggleTexture("");
 		pressed = false;
 	}
@@ -73,7 +74,7 @@ bool Button::checkMouseCollision() {
 }
 
 /**
- * Does all unpressing actions
+ * Reverts button and mouse to initial state
  */
 int Button::unpressButton(int bl) {
 	int buttonLock = bl;
@@ -92,6 +93,8 @@ int Button::unpressButton(int bl) {
  * @param str Differentiator string: "" for unpressed, "2" for pressed
  */
 void Button::toggleTexture(std::string str) {
+	// Start button can toggle any time
+	// Other button only toggle when the game is not running
 	if (Game::getGameState() == READY || buttonID == START_BTN) {
 		deleteTexture();
 		std::string filename = ASSETS_FOLDER + filenames[buttonID - 1] + str + ASSET_EXTENSION;
@@ -128,20 +131,20 @@ void Button::action() {
 		case START_BTN:
 			switch (Game::getGameState()) {
 				case READY:
-					if (DEBUG)
-						printf("[BUTTON] Start activation\n");
-
+					// Starts game if it has enough credits
 					if (Game::getCredits() > 0)
 						Game::start();
 					break;
 
 				case PLAYING:
+					// Pauses game
 					Game::setGameState(PAUSED);
 					if (DEBUG)
 						printf("[BUTTON] Game Paused\n");
 					break;
 
 				case PAUSED:
+					// Unpauses game
 					Game::setGameState(PLAYING);
 					if (DEBUG)
 						printf("[BUTTON] Game Started\n");

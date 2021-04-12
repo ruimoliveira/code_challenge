@@ -21,7 +21,7 @@ public:
 	void render();
 	void clean();
 private:
-	int buttonLock;
+	int mouseLock;
 	Button * creditsInButton;
 	Button * creditsOutButton;
 	Button * startButton;

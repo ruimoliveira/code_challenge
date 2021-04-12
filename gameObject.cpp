@@ -59,9 +59,7 @@ void GameObject::deleteTexture() {
 /**
  * Updates Game Object
  */
-void GameObject::update() {
-
-}
+void GameObject::update() {}
 
 /**
  * Renders game object

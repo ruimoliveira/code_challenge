@@ -20,11 +20,7 @@ Game::Game(SDL_Window * window) {
  * Starts game
  */
 void Game::start() {
-	/*
-	gameState = STARTED;
-	if (DEBUG)
-		printf("[GAME] gameState : %i\n", gameState);
-	*/
+	//applies playing tax
 	credits--;
 
 	computeResult();
@@ -34,7 +30,7 @@ void Game::start() {
 }
 
 /**
- * Computes game result
+ * Randomizes final reel position for each reel and stores on gameResult
  */
 void Game::computeResult() {
 	srand(time(NULL));

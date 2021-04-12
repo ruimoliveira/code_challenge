@@ -27,15 +27,18 @@ void Scene::update() {
 		int m = middleReel->ready();
 		int r = rightReel->ready();
 
+		// Winning condition
 		if (l == m && m == r) {
 			if (DEBUG)
 				printf("[SCENE] YOU WON %i CREDITS!\n", CREDITS_PRIZE);
 			Game::setCredits(Game::getCredits() + CREDITS_PRIZE);
 		}
 		
+		//readies game for next play
 		Game::setGameState(READY);
 		if (DEBUG)
 			printf("[SCENE] Game Ready\n");
+		//counts play
 		playCounter->addToCounter(1);
 	}
 
