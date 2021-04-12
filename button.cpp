@@ -64,6 +64,9 @@ bool Button::checkMouseCollision() {
 			toggleTexture("2");
 		pressed = true;
 		return true;
+	} else if (pressed) {
+		toggleTexture("");
+		pressed = false;
 	}
 
 	return false;
