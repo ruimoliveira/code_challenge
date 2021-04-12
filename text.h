@@ -25,6 +25,7 @@ public:
 
 	void addToCounter(int qt);
 	void loadTexture(const char* text);
+	void updateTexture();
 	void render();
 	void update();
 	void clean();
@@ -32,7 +33,9 @@ public:
 private:
 	int textID;
 	int counter;
+	int credits;
 	std::string text;
+	TTF_Font * font;
 	SDL_Texture * texture;
 	SDL_Rect destRect;
 };

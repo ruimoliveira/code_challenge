@@ -17,7 +17,6 @@ void UserInterface::update() {
 	buttonLock = creditsInButton->update(buttonLock, false);
 	buttonLock = creditsOutButton->update(buttonLock, false);
 	buttonLock = startButton->update(buttonLock, true);
-
 	creditsLabel->update();
 }
 

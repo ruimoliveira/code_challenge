@@ -4,7 +4,7 @@
  * Text constructor
  * @param filename Text counter ID
  */
-Text::Text(int textID) : textID{ textID }, counter { 0 } {
+Text::Text(int textID) : textID{ textID }, counter{ 0 }, credits{ 0 } {
 	switch (textID) {
 		case TEXT_CREDITS_INSERTED:
 			text = C_I;
@@ -17,11 +17,8 @@ Text::Text(int textID) : textID{ textID }, counter { 0 } {
 			break;
 	}
 
-	std::string textToDisplay = text + std::to_string(counter);
-	loadTexture(textToDisplay.c_str());
-
-	SDL_QueryTexture(texture, nullptr, nullptr, &destRect.w, &destRect.h);
-	update();
+	font = TTF_OpenFont("assets/arial.ttf", FONT_SIZE);
+	addToCounter(counter);
 }
 
 /**
@@ -32,10 +29,11 @@ void Text::addToCounter(int qt) {
 	counter = counter + qt;
 	if (DEBUG)
 		printf("[TEXT %i] Counter = %i\n", textID, counter);
-	SDL_DestroyTexture(texture);
 
 	std::string textToDisplay = text + std::to_string(counter);
 	loadTexture(textToDisplay.c_str());
+
+	updateTexture();
 }
 
 /**
@@ -43,7 +41,7 @@ void Text::addToCounter(int qt) {
  * @param text Text to display
  */
 void Text::loadTexture(const char* text) {
-	TTF_Font *font = TTF_OpenFont("assets/arial.ttf", FONT_SIZE);
+	clean();
 	SDL_Color color = { 255, 255, 255, 255 };
 	SDL_Surface * tempSurface = TTF_RenderText_Solid(font, text, color);
 	texture = SDL_CreateTextureFromSurface(Game::getRenderer(), tempSurface);
@@ -51,16 +49,11 @@ void Text::loadTexture(const char* text) {
 }
 
 /**
- * Renders Text
+ * Updates texture
  */
-void Text::render() {
-	SDL_RenderCopy(Game::getRenderer(), texture, NULL, &destRect);
-}
+void Text::updateTexture() {
+	SDL_QueryTexture(texture, nullptr, nullptr, &destRect.w, &destRect.h);
 
-/**
- * Updates Text
- */
-void Text::update() {
 	int xPos = WINDOW_W / 2 - destRect.w / 2, yPos;
 	switch (textID) {
 	case TEXT_CREDITS_INSERTED:
@@ -75,6 +68,37 @@ void Text::update() {
 	}
 	destRect.x = xPos;
 	destRect.y = yPos;
+}
+
+/**
+ * Renders Text
+ */
+void Text::render() {
+	SDL_RenderCopy(Game::getRenderer(), texture, NULL, &destRect);
+}
+
+/**
+ * Updates Text
+ */
+void Text::update() {
+	if (Game::getCredits() != credits)
+		switch (textID) {
+			case TEXT_CREDITS_INSERTED:
+				if (Game::getCredits() == credits + 1) {
+					addToCounter(1);
+					credits = Game::getCredits();
+				} else if (Game::getCredits() > credits || Game::getCredits() == 0 || Game::getCredits() == credits - 1)
+					credits = Game::getCredits();
+				break;
+
+			case TEXT_CREDITS_TAKEN:
+				if (Game::getCredits() == 0) {
+					addToCounter(credits);
+					credits = Game::getCredits();
+				} else
+					credits = Game::getCredits();
+				break;
+		}
 }
 
 /**

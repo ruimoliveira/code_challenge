@@ -16,7 +16,6 @@ const int REEL_ROLL_W = 120;
 const int REEL_MARGIN = 5;
 const int SYMBOL_W_H = 100;
 const int SYMBOL_MARGIN = 10;
-const int REEL_SIZE = 20;
 const int MAX_REEL_VELOCITY = 2755;
 const int REEL_ACCELERATION = 13687;
 const int REEL_DECELERATION = -5685;

@@ -7,11 +7,14 @@
 #include <stdio.h>
 #include <time.h>
 #include <random>
+#include <cmath>
 
 enum gameStates { READY, STARTED, PLAYING, PAUSED, FINISHED };
 enum mouseStates { MOUSE_UP, MOUSE_DOWN, MOUSE_IDDLE };
 const int MIN_REEL_ROTATIONS = 1;
 const int N_REELS = 3;
+const int REEL_SIZE = 20;
+const int CREDITS_PRIZE = 400;
 
 /**
  * @class Game

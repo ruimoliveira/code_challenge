@@ -29,8 +29,8 @@ void Scene::update() {
 
 		if (l == m && m == r) {
 			if (DEBUG)
-				printf("[SCENE] YOU WON!");
-			Game::setCredits(Game::getCredits() + 1000000);
+				printf("[SCENE] YOU WON %i CREDITS!\n", CREDITS_PRIZE);
+			Game::setCredits(Game::getCredits() + CREDITS_PRIZE);
 		}
 		
 		Game::setGameState(READY);
@@ -40,6 +40,9 @@ void Scene::update() {
 	}
 
 	userInterface->update();
+	creditsInCounter->update();
+	creditsOutCounter->update();
+	playCounter->update();
 }
 
 /**
