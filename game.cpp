@@ -20,10 +20,11 @@ Game::Game(SDL_Window * window) {
  * Starts game
  */
 void Game::start() {
+	/*
 	gameState = STARTED;
 	if (DEBUG)
 		printf("[GAME] gameState : %i\n", gameState);
-	
+	*/
 	credits--;
 
 	computeResult();

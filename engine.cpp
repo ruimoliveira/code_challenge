@@ -1,7 +1,7 @@
 #include "engine.h"
 
 /**
- * Initiates SDL and engine functions
+ * Initiates SDL components and engine functions
  */
 void Engine::run() {
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -33,7 +33,7 @@ void Engine::initGame() {
  * Initiates SDL Renderer
  */
 void Engine::initRenderer() {
-	SDL_SetRenderDrawColor(Game::getRenderer(), 50, 50, 50, 50);
+	SDL_SetRenderDrawColor(game->getRenderer(), 50, 50, 50, 50);
 }
 
 /**
@@ -42,6 +42,7 @@ void Engine::initRenderer() {
 void Engine::mainLoop() {
 	running = true;
 
+	//initiates FPS cap related 
 	const int frameDelay = 1000 / FPS;
 	Uint32 frameStart;
 	int frameTime;
@@ -54,7 +55,8 @@ void Engine::mainLoop() {
 		handleEvents();
 		update();
 		render();
-		
+
+		//FPS cap
 		frameTime = SDL_GetTicks() - frameStart;
 		if (frameDelay > frameTime)
 			SDL_Delay(frameDelay - frameTime);
@@ -102,7 +104,7 @@ void Engine::render() {
 }
 
 /**
- * Safely exits SDL
+ * Safely exits game, scene and SDL
  */
 void Engine::clean() {
 	SDL_DestroyWindow(window);

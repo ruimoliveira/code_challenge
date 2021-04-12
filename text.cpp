@@ -81,24 +81,25 @@ void Text::render() {
  * Updates Text
  */
 void Text::update() {
-	if (Game::getCredits() != credits)
+	if (Game::getCredits() != credits) {
 		switch (textID) {
-			case TEXT_CREDITS_INSERTED:
-				if (Game::getCredits() == credits + 1) {
-					addToCounter(1);
-					credits = Game::getCredits();
-				} else if (Game::getCredits() > credits || Game::getCredits() == 0 || Game::getCredits() == credits - 1)
-					credits = Game::getCredits();
-				break;
+		case TEXT_CREDITS_INSERTED:
+			if (Game::getCredits() == credits + 1)
+				addToCounter(1);
+			break;
 
-			case TEXT_CREDITS_TAKEN:
-				if (Game::getCredits() == 0) {
-					addToCounter(credits);
-					credits = Game::getCredits();
-				} else
-					credits = Game::getCredits();
-				break;
+		case TEXT_CREDITS_TAKEN:
+			if (Game::getCredits() == 0 && Game::getGameState() == READY) {
+				if (DEBUG)
+					printf("[TEXT %i] getGameState = %i\n", textID,Game::getGameState());
+
+				addToCounter(credits);
+			}
+			break;
 		}
+
+		credits = Game::getCredits();
+	}
 }
 
 /**
