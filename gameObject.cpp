@@ -18,20 +18,6 @@ GameObject::GameObject(const char* fn, int xPos, int yPos, int rectH, int rectW)
 }
 
 /**
- * Renders game object
- */
-void GameObject::render() {
-	SDL_RenderCopy(Game::getRenderer(), texture, NULL, &destRect);
-}
-
-/**
- * Updates Game Object
- */
-void GameObject::update() {
-
-}
-
-/**
  * Destination rect getter
  */
 SDL_Rect * GameObject::getDestRect() {
@@ -56,14 +42,32 @@ void GameObject::setDestRectY(int y) {
 /**
  * Loads texture from file
  * @param filename Texture filename
- * @return Texture
  */
 void GameObject::loadTexture(const char* filename) {
 	SDL_Surface * tempSurface = IMG_Load(filename);
-	SDL_Texture * texture = SDL_CreateTextureFromSurface(Game::getRenderer(), tempSurface);
+	texture = SDL_CreateTextureFromSurface(Game::getRenderer(), tempSurface);
 	SDL_FreeSurface(tempSurface);
+}
 
-	this->texture = texture;
+/**
+ * Deletes Texture
+ */
+void GameObject::deleteTexture() {
+	SDL_DestroyTexture(texture);
+}
+
+/**
+ * Updates Game Object
+ */
+void GameObject::update() {
+
+}
+
+/**
+ * Renders game object
+ */
+void GameObject::render() {
+	SDL_RenderCopy(Game::getRenderer(), texture, NULL, &destRect);
 }
 
 /**
@@ -72,11 +76,4 @@ void GameObject::loadTexture(const char* filename) {
 void GameObject::clean() {
 	deleteTexture();
 	delete this;
-}
-
-/**
- * Deletes Texture
- */
-void GameObject::deleteTexture() {
-	SDL_DestroyTexture(texture);
 }

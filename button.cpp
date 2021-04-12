@@ -95,7 +95,7 @@ void Button::toggleTexture(std::string str) {
 	if (Game::getGameState() == READY || buttonID == START_BTN) {
 		deleteTexture();
 		std::string filename = ASSETS_FOLDER + filenames[buttonID - 1] + str + ASSET_EXTENSION;
-		loadTexture(&filename[0]);
+		loadTexture(filename.c_str());
 	}
 }
 

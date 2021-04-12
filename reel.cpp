@@ -52,13 +52,13 @@ void Reel::initGameObjects(int xPos, int yPos) {
 
 	currentSymbolPosition = 0;
 	std::string filename = ASSETS_FOLDER + symbols[reelOrder[0]] + ASSET_EXTENSION;
-	gameSymbol = new GameObject(&filename[0], xPos + ((REEL_ROLL_W - SYMBOL_W_H) / 2), yPos + (SYMBOL_W_H + SYMBOL_MARGIN), SYMBOL_W_H, SYMBOL_W_H);
+	gameSymbol = new GameObject(filename.c_str(), xPos + ((REEL_ROLL_W - SYMBOL_W_H) / 2), yPos + (SYMBOL_W_H + SYMBOL_MARGIN), SYMBOL_W_H, SYMBOL_W_H);
 
 	filename = ASSETS_FOLDER + symbols[reelOrder[REEL_SIZE - 1]] + ASSET_EXTENSION;
-	topSymbol = new GameObject(&filename[0], xPos + ((REEL_ROLL_W - SYMBOL_W_H) / 2), yPos, SYMBOL_W_H, SYMBOL_W_H);
+	topSymbol = new GameObject(filename.c_str(), xPos + ((REEL_ROLL_W - SYMBOL_W_H) / 2), yPos, SYMBOL_W_H, SYMBOL_W_H);
 
 	filename = ASSETS_FOLDER + symbols[reelOrder[1]] + ASSET_EXTENSION;
-	bottomSymbol = new GameObject(&filename[0], xPos + ((REEL_ROLL_W - SYMBOL_W_H) / 2), yPos + ((SYMBOL_W_H + SYMBOL_MARGIN) * 2), SYMBOL_W_H, SYMBOL_W_H);
+	bottomSymbol = new GameObject(filename.c_str(), xPos + ((REEL_ROLL_W - SYMBOL_W_H) / 2), yPos + ((SYMBOL_W_H + SYMBOL_MARGIN) * 2), SYMBOL_W_H, SYMBOL_W_H);
 }
 
 /**

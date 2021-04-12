@@ -5,6 +5,8 @@
  */
 void Engine::run() {
 	SDL_Init(SDL_INIT_EVERYTHING);
+	IMG_Init(IMG_INIT_PNG);
+	TTF_Init();
 	initWindow();
 	initGame();
 	initRenderer();
@@ -106,5 +108,7 @@ void Engine::clean() {
 	SDL_DestroyWindow(window);
 	scene->clean();
 	game->clean();
+	TTF_Quit();
+	IMG_Quit();
 	SDL_Quit();
 }

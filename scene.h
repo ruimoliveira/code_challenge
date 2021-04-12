@@ -7,6 +7,7 @@
 #include "slotScreen.h"
 #include "userInterface.h"
 #include "game.h"
+#include "text.h"
 
 /**
  * @class Scene
@@ -28,6 +29,9 @@ private:
 	Reel * rightReel;
 	SlotScreen * slotScreen;
 	UserInterface * userInterface;
+	Text * creditsInCounter;
+	Text * creditsOutCounter;
+	Text * playCounter;
 };
 
 #endif

@@ -26,7 +26,7 @@ public:
 private:
 	int xPosition, yPosition;
 	SDL_Texture * texture;
-	SDL_Rect srcRect, destRect;
+	SDL_Rect destRect;
 };
 
 #endif

@@ -9,6 +9,9 @@ Scene::Scene() {
 	rightReel = new Reel(RIGHT);
 	slotScreen = new SlotScreen();
 	userInterface = new UserInterface();
+	creditsInCounter = new Text(TEXT_CREDITS_INSERTED);
+	creditsOutCounter = new Text(TEXT_CREDITS_TAKEN);
+	playCounter = new Text(TEXT_PLAY_COUNTER);
 }
 
 /**
@@ -31,6 +34,9 @@ void Scene::update() {
 		}
 		
 		Game::setGameState(READY);
+		if (DEBUG)
+			printf("[SCENE] Game Ready\n");
+		playCounter->addToCounter(1);
 	}
 
 	userInterface->update();
@@ -45,6 +51,9 @@ void Scene::render() {
 	rightReel->render();
 	slotScreen->render();
 	userInterface->render();
+	creditsInCounter->render();
+	creditsOutCounter->render();
+	playCounter->render();
 }
 
 /**
@@ -56,4 +65,7 @@ void Scene::clean() {
 	rightReel->clean();
 	slotScreen->clean();
 	userInterface->clean();
+	creditsInCounter->clean();
+	creditsOutCounter->clean();
+	playCounter->clean();
 }

@@ -2,6 +2,8 @@
 #define engine_h
 
 #include "SDL.h"
+#include "SDL_ttf.h"
+#include "SDL_image.h"
 #include "game.h"
 #include "scene.h"
 #include "constants.h"
