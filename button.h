@@ -1,13 +1,19 @@
 #ifndef button_h
 #define button_h
 
-#include "SDL.h"
-#include "gameObject.h"
-#include "constants.h"
-#include "game.h"
+
+#ifdef __linux__
+#include <SDL2/SDL.h>
+#else
+#include <SDL.h>
+#endif
 
 #include <stdio.h>
 #include <string>
+
+#include "gameObject.h"
+#include "constants.h"
+#include "game.h"
 
 enum buttonIDs { NONE = 0, CREDITS_IN_BTN = 1, CREDITS_OUT_BTN = 2, START_BTN = 3 };
 

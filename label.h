@@ -1,14 +1,19 @@
 #ifndef label_h
 #define label_h
 
-#include "SDL.h"
-#include "gameObject.h"
-#include "constants.h"
-#include "game.h"
+#ifdef __linux__
+#include <SDL2/SDL.h>
+#else
+#include <SDL.h>
+#endif
 
 #include <stdio.h>
 #include <map>
 #include <string>
+
+#include "gameObject.h"
+#include "constants.h"
+#include "game.h"
 
 const float LABEL_W = 55 * UI_SCALE;
 const float LABEL_H = 71 * UI_SCALE;

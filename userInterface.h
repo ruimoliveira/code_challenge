@@ -1,12 +1,16 @@
 #ifndef userInterface_h
 #define userInterface_h
 
-#include "SDL.h"
-#include "button.h"
-#include "label.h"
-
+#ifdef __linux__
+#include <SDL2/SDL.h>
+#else
+#include <SDL.h>
+#endif
 #include <stdio.h>
 #include <iostream>
+
+#include "button.h"
+#include "label.h"
 
 /**
  * @class UserInterface

@@ -1,13 +1,18 @@
 #ifndef game_h
 #define game_h
 
-#include "SDL.h"
-#include "constants.h"
+#ifdef __linux__
+#include <SDL2/SDL.h>
+#else
+#include <SDL.h>
+#endif
 
 #include <stdio.h>
 #include <time.h>
 #include <random>
 #include <cmath>
+
+#include "constants.h"
 
 enum gameStates { READY, PLAYING, PAUSED, FINISHED };
 enum mouseStates { MOUSE_UP, MOUSE_DOWN, MOUSE_IDDLE };

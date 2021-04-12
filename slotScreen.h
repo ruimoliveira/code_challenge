@@ -1,7 +1,12 @@
 #ifndef slotScreen_h
 #define slotScreen_h
 
-#include "SDL.h"
+#ifdef __linux__
+#include <SDL2/SDL.h>
+#else
+#include <SDL.h>
+#endif
+
 #include "gameObject.h"
 #include "constants.h"
 

@@ -1,14 +1,22 @@
 #ifndef engine_h
 #define engine_h
 
-#include "SDL.h"
-#include "SDL_ttf.h"
-#include "SDL_image.h"
+#ifdef __linux__
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
+#else
+#include <SDL.h>
+#include <SDL_ttf.h>
+#include <SDL_image.h>
+#endif
+
+#include <stdio.h>
+
 #include "game.h"
 #include "scene.h"
 #include "constants.h"
 
-#include <stdio.h>
 
 /**
  * @class Engine

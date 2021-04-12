@@ -1,15 +1,20 @@
 #ifndef reel_h
 #define reel_h
 
-#include "SDL.h"
-#include "constants.h"
-#include "gameObject.h"
-#include "slotScreen.h"
+#ifdef __linux__
+#include <SDL2/SDL.h>
+#else
+#include <SDL.h>
+#endif
 
 #include <algorithm>
 #include <random>
 #include <stdio.h>
 #include <string>
+
+#include "constants.h"
+#include "gameObject.h"
+#include "slotScreen.h"
 
 const int REEL_ROLL_H = 320;
 const int REEL_ROLL_W = 120;
