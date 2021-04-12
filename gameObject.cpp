@@ -47,6 +47,7 @@ int GameObject::getY() {
 
 /**
  * Sets new position for SDL_Rect
+ * @param y New y axis coordinate
  */
 void GameObject::setDestRectY(int y) {
 	destRect.y = y;

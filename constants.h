@@ -8,7 +8,7 @@ const int WINDOW_W = 1000;
 const int FPS = 300;
 const float UI_SCALE = 0.6F;
 const int EDGE_MARGIN = 20;
-const bool DEBUG = true;
+const bool DEBUG = false;
 const std::string ASSETS_FOLDER = "assets/";
 const std::string ASSET_EXTENSION = ".png";
 

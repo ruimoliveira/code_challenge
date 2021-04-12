@@ -21,10 +21,10 @@ const int MAX_REEL_VELOCITY = 2755;
 const int REEL_ACCELERATION = 13687;
 const int REEL_DECELERATION = -5685;
 const int REEL_SLOW_DECELERATION = -5685;
-//const int LOOK_AHEAD = 
+const int LOOK_AHEAD = 6;
 
 enum reelPos { LEFT, MIDDLE, RIGHT };
-enum reelStatus { REEL_STOPPED, REEL_ACCELERATING, REEL_MOVING, REEL_DECELERATING };
+enum reelStatus { REEL_STOPPED, REEL_ACCELERATING, REEL_MOVING, REEL_DECELERATING, REEL_FINISHED };
 
 /**
  * @class Scene
@@ -35,6 +35,7 @@ public:
 	Reel(int reelPos);
 	~Reel() {};
 
+	int ready();
 	void update();
 	void render();
 	void clean();
@@ -48,10 +49,10 @@ private:
 	int position;
 	int status;
 	int reelHead;
+	int spinsLeft;
 	Uint32 lastFrameTick;
 	float currentVelocity;
 	int currentSymbolPosition;
-	int spinsLeft;
 	const std::string symbols[20] = { "ace", "apple", "bar", "cherry", "chest",
 								 "chip7", "chipspades", "clover", "coin", "diamond",
 								 "emerald", "grapes", "horseshoe", "jack", "king",

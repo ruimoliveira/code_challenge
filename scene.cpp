@@ -18,6 +18,21 @@ void Scene::update() {
 	leftReel->update();
 	middleReel->update();
 	rightReel->update();
+
+	if (Game::getGameState() == FINISHED) {
+		int l = leftReel->ready();
+		int m = middleReel->ready();
+		int r = rightReel->ready();
+
+		if (l == m && m == r) {
+			if (DEBUG)
+				printf("[SCENE] YOU WON!");
+			Game::setCredits(Game::getCredits() + 1000000);
+		}
+		
+		Game::setGameState(READY);
+	}
+
 	userInterface->update();
 }
 

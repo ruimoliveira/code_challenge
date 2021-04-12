@@ -8,7 +8,7 @@
 #include <time.h>
 #include <random>
 
-enum gameStates { FINISHED, STARTED, PLAYING, PAUSED };
+enum gameStates { READY, STARTED, PLAYING, PAUSED, FINISHED };
 enum mouseStates { MOUSE_UP, MOUSE_DOWN, MOUSE_IDDLE };
 const int MIN_REEL_ROTATIONS = 1;
 const int N_REELS = 3;

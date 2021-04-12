@@ -3,7 +3,6 @@
 /**
  * Button constructor
  * @param filename Texture filename
- * @param renderer Target renderer
  * @param xPosition Position in the X axis
  * @param yPosition Position in the Y axis
  * @param rectH Rectangle height
@@ -17,8 +16,8 @@ Button::Button(const char* filename, int xPosition, int yPosition, int rectH, in
 
 /**
  * Updates button status
- * @ bl Which button is being clicked
- * @ lastButton If this function is checking the last button in the UI
+ * @param bl Which button is being clicked
+ * @param lastButton If this function is checking the last button in the UI
  */
 int Button::update(int bl, bool lastButton) {
 	int buttonLock = bl;
@@ -90,7 +89,7 @@ int Button::unpressButton(int bl) {
  * @param str Differentiator string: "" for unpressed, "2" for pressed
  */
 void Button::toggleTexture(std::string str) {
-	if (Game::getGameState() == FINISHED || buttonID == START_BTN) {
+	if (Game::getGameState() == READY || buttonID == START_BTN) {
 		deleteTexture();
 		std::string filename = ASSETS_FOLDER + filenames[buttonID - 1] + str + ASSET_EXTENSION;
 		loadTexture(&filename[0]);
@@ -104,7 +103,7 @@ void Button::action() {
 	int credits = Game::getCredits();
 	switch (buttonID) {
 		case CREDITS_IN_BTN:
-			if (Game::getGameState() == FINISHED) {
+			if (Game::getGameState() == READY) {
 				if (DEBUG)
 					printf("[BUTTON] Credits in activation\n");
 
@@ -114,7 +113,7 @@ void Button::action() {
 			break;
 
 		case CREDITS_OUT_BTN:
-			if (Game::getGameState() == FINISHED) {
+			if (Game::getGameState() == READY) {
 				if (DEBUG)
 					printf("[BUTTON] Credits out activation\n");
 
@@ -125,7 +124,7 @@ void Button::action() {
 
 		case START_BTN:
 			switch (Game::getGameState()) {
-				case FINISHED:
+				case READY:
 					if (DEBUG)
 						printf("[BUTTON] Start activation\n");
 

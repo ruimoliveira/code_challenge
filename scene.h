@@ -6,6 +6,7 @@
 #include "reel.h"
 #include "slotScreen.h"
 #include "userInterface.h"
+#include "game.h"
 
 /**
  * @class Scene
