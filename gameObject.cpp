@@ -44,9 +44,12 @@ void GameObject::setDestRectY(int y) {
  * @param filename Texture filename
  */
 void GameObject::loadTexture(const char* filename) {
+	/*
 	SDL_Surface * tempSurface = IMG_Load(filename);
 	texture = SDL_CreateTextureFromSurface(Game::getRenderer(), tempSurface);
 	SDL_FreeSurface(tempSurface);
+	*/
+	texture = IMG_LoadTexture(Game::getRenderer(), filename);
 }
 
 /**
